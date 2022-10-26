@@ -3,15 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        canvas {
+            cursor: url("img/hammer_1.png") 32 32, auto;
+        }
+    </style>
 </head>
 <body id="game_board">
-<iframe src="star.mp3" allow="autoplay loop" style="display:none" id="iframeAudio"></iframe>
-<canvas id="a" width="860px" height="650px" style="border: 2px solid blue; background-image: url(img/images.jpg)"
+
+<canvas id="a" width="880px" height="500px" style="border: 1px solid white; background-image: url(img/images.jpg)"
         onclick="animated_cursor()"></canvas>
-<p>điểm : <samp id="hienthi"></samp></p>
+<iframe src="star.mp3" allow="autoplay loop" style="display:none" id="iframeAudio"></iframe>
+<p>Điểm : <samp id="hienthi"></samp></p>
 <p>Mạng : <samp id="hienthimang"></samp></p>
 
-<script charset="UTF-8">
+<script>
     let ve = document.getElementById("a");
     let ctx = ve.getContext("2d");
     let chuot = function (toaDoX, toaDoY) {
@@ -42,7 +48,7 @@
     let mangy = [-15, 145, 308];
     let diem = 0;
     let time = 1000;
-    let mang = 30;
+    let mang = 10;
 
     function xuLyDapBua(e) {
         if (chuotBach.getToaDoX() < e.clientX && chuotBach.getToaDoX() + 150 > e.clientX &&
@@ -94,7 +100,7 @@
                 break;
         }
         if (mang === 0) {
-            document.write("Game over")
+            document.write("Trò chơi kết thúc " + "</br>" + "Điểm của bạn là : " + diem)
         }
         console.log(time);
         ab = setInterval(run1, time);
