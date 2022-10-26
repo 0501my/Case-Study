@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body id="game_board">
+<iframe src="star.mp3" allow="autoplay loop" style="display:none" id="iframeAudio"></iframe>
+<canvas id="a" width="860px" height="650px" style="border: 2px solid blue; background-image: url(img/images.jpg)"
+        onclick="animated_cursor()"></canvas>
+<p>điểm : <samp id="hienthi"></samp></p>
+<p>Mạng : <samp id="hienthimang"></samp></p>
+
+<script charset="UTF-8">
+    let ve = document.getElementById("a");
+    let ctx = ve.getContext("2d");
+    let chuot = function (toaDoX, toaDoY) {
+        this.toaDoX = toaDoX;
+        this.toaDoY = toaDoY;
+        this.setToaDoX = function (toaDoX) {
+            this.toaDoX = toaDoX
+        };
+        this.setToaDoY = function (toaDoY) {
+            this.toaDoY = toaDoY
+        };
+        this.getToaDoX = function () {
+            return this.toaDoX
+        };
+        this.getToaDoY = function () {
+            return this.toaDoY
+        };
+        this.veChuot = function () {
+            let anhChuot = new Image();
+            ctx.beginPath();
+            anhChuot.src = "img/kero.png";
+            ctx.drawImage(anhChuot, this.toaDoX, this.toaDoY, 150, 130);
+            ctx.closePath();
+        };
+    };
+    let chuotBach = new chuot(375, 308);
+    let mangx = [70, 375, 675];
+    let mangy = [-15, 145, 308];
+    let diem = 0;
+    let time = 1000;
+    let mang = 30;
+
+    function xuLyDapBua(e) {
+        if (chuotBach.getToaDoX() < e.clientX && chuotBach.getToaDoX() + 150 > e.clientX &&
+            chuotBach.getToaDoY() < e.clientY) {
+            diem++;
+            ctx.clearRect(0, 0, ve.width, ve.height);
+            tiengbua();
+            hieuung();
+            chuotBach.setToaDoX(-500);
+
+        } else {
+            mang--;
+        }
+        document.getElementById("hienthi").innerHTML = diem;
+        document.getElementById("hienthimang").innerHTML = mang;
+        kiemtraThangThua()
+    }
+
+    function tiengbua() {
+        let music = new Audio("audio/bua1.mp3");
+        music.play();
+    }
+
+    function hieuung() {
+        let anhhieuung = new Image();
+        ctx.beginPath();
+        anhhieuung.src = "img/pow.png";
+        ctx.drawImage(anhhieuung, chuotBach.toaDoX + 25, chuotBach.toaDoY, 100, 100);
+        ctx.closePath();
+    }
+
+    function kiemtraThangThua() {
+        clearInterval(ab);
+        switch (diem) {
+            case 10:
+                time = 800;
+                break;
+            case 20:
+                time = 700;
+                break;
+            case 30:
+                time = 600;
+                break;
+            case 40:
+                time = 500;
+                break;
+            case 50:
+                time = 400;
+                break;
+        }
+        if (mang === 0) {
+            document.write("Game over")
+        }
+        console.log(time);
+        ab = setInterval(run1, time);
+
+    }
+
+    function animated_cursor() {
+        let png_url = ["img/hammer_1.png", "img/hammer_2.png", "img/hammer_3.png", "img/hammer_4.png", "img/hammer_5.png", "img/hammer_6.png", "img/hammer_7.png",
+            "img/hammer_8.png", "img/hammer_9.png", "img/hammer_10.png", "img/hammer_11.png", "img/hammer_10.png", "img/hammer_9.png", "img/hammer_8.png",
+            "img/hammer_7.png", "img/hammer_6.png", "img/hammer_5.png", "img/hammer_4.png", "img/hammer_3.png", "img/hammer_2.png", "img/hammer_1.png"];
+        let count = 0;
+        let hit = setInterval(function () {
+            if (count < 20) {
+                document.getElementById("a").style.cursor = "url(" + png_url[count] + "), auto";
+                count++;
+            } else if (count === 20) {
+                clearInterval(hit);
+            }
+        }, 5)
+    }
+
+    function run1() {
+        ctx.clearRect(0, 0, ve.width, ve.height);
+        chuotBach.setToaDoX(mangx[Math.floor(Math.random() * 3)]);
+        chuotBach.setToaDoY(mangy[Math.floor(Math.random() * 3)]);
+        chuotBach.veChuot();
+    }
+
+    let ab = setInterval(run1, time);
+    document.addEventListener("click", xuLyDapBua);
+</script>
+</body>
+</html>
