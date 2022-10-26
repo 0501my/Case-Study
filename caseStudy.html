@@ -11,12 +11,13 @@
 </head>
 <body id="game_board">
 
-<canvas id="a" width="880px" height="500px" style="border: 1px solid white; background-image: url(img/images.jpg)"
+<canvas id="a" width="880px" height="500px" style="border: 1px solid darkred; background-image: url(img/images.jpg)"
         onclick="animated_cursor()"></canvas>
-<iframe style="display:none" id="iframeAudio"></iframe>
-<audio autoplay>
-    <source src="star.mp3">
+<audio controls autoplay>
+    <source src = "star.mp3">
 </audio>
+
+
 <p>Điểm : <samp id="hienthi"></samp></p>
 <p>Mạng : <samp id="hienthimang"></samp></p>
 
@@ -105,7 +106,7 @@
         if (mang === 0) {
             document.write("Trò chơi kết thúc " + "</br>" + "Điểm của bạn là : " + diem)
         }
-        console.log(time);
+        // console.log(time);
         ab = setInterval(run1, time);
 
     }
