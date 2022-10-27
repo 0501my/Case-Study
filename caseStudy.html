@@ -13,8 +13,8 @@
 
 <canvas id="a" width="880px" height="500px" style="border: 1px solid darkred; background-image: url(img/images.jpg)"
         onclick="animated_cursor()"></canvas>
-<audio controls autoplay>
-    <source src = "star.mp3">
+<audio controls loop>
+    <source src = "star.mp3" type="audio/mpeg">
 </audio>
 
 
@@ -51,8 +51,8 @@
     let mangx = [70, 375, 675];
     let mangy = [-15, 145, 308];
     let diem = 0;
-    let time = 1000;
-    let mang = 10;
+    let time = 1200;
+    let mang = 99;
 
     function xuLyDapBua(e) {
         if (chuotBach.getToaDoX() < e.clientX && chuotBach.getToaDoX() + 150 > e.clientX &&
@@ -88,19 +88,19 @@
         clearInterval(ab);
         switch (diem) {
             case 10:
-                time = 800;
+                time = 1100;
                 break;
             case 20:
-                time = 700;
+                time = 1000;
                 break;
             case 30:
-                time = 600;
+                time = 900;
                 break;
             case 40:
-                time = 500;
+                time = 800;
                 break;
             case 50:
-                time = 400;
+                time = 700;
                 break;
         }
         if (mang === 0) {
@@ -135,6 +135,7 @@
 
     let ab = setInterval(run1, time);
     document.addEventListener("click", xuLyDapBua);
+        // window.onload(<audio src="star.mp3"></audio>)
 </script>
 </body>
 </html>
