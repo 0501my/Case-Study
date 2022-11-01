@@ -42,11 +42,11 @@ function createListElement() {
 
 
 function addListAfterClick() {
-    if (inputLength() > 0) {  // đảm bảo rằng trường nhập trống không tạo ra thêm dòng
+    if (inputLength() > 0) {  // đảm bảo rằng trường nhập bỏ trống không tạo ra thêm dòng
         createListElement();
     }
 }
-// cái này bây giờ xem bạn có nhấn "enter" / "return" không. Số 13 là mã khóa của khóa enter
+// cái này bây giờ xem có nhấn "enter" / "return" không. Số 13 là mã khóa của khóa enter
 function addListAfterKeypress(event) {
     if (inputLength() > 0 && event.which === 13) {
         createListElement();

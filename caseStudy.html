@@ -9,21 +9,30 @@
         }
     </style>
 </head>
-<body id="game_board">
+<body id="game_board" onload="showScore()">
 
 <canvas id="a" width="880 px" height="500px" style="border: 1px solid darkred; background-image: url(img/images.jpg)"
         onclick="animated_cursor()"></canvas>
 <audio controls loop>
-    <source src = "star.mp3" type="audio/mpeg">
+    <source src="star.mp3" type="audio/mpeg">
 </audio>
 
 
 <p>Điểm : <samp id="hienthi"></samp></p>
 <p>Mạng : <samp id="hienthimang"></samp></p>
+<p> Điểm cao nhất : <samp id="dcn"></samp></p>
 
 <script>
     let ve = document.getElementById("a");
     let ctx = ve.getContext("2d");
+
+    function showScore() {
+        if(score>diem){
+            document.getElementById('dcn').innerHTML = score;
+        }
+
+    }
+
     let chuot = function (toaDoX, toaDoY) {
         this.toaDoX = toaDoX;
         this.toaDoY = toaDoY;
@@ -50,9 +59,10 @@
     let chuotBach = new chuot(375, 308);
     let mangx = [70, 375, 675];
     let mangy = [-15, 145, 308];
-    let diem = 0;
+    let diem = 0
+    let score = +localStorage.getItem("score")
     let time = 1200;
-    let mang = 99;
+    let mang = 9;
 
     function xuLyDapBua(e) {
         if (chuotBach.getToaDoX() < e.clientX && chuotBach.getToaDoX() + 150 > e.clientX &&
@@ -105,8 +115,8 @@
         }
         if (mang === 0) {
             document.write("Trò chơi kết thúc " + "</br>" + "Điểm của bạn là : " + diem)
+            localStorage.setItem('score', diem);
         }
-        // console.log(time);
         ab = setInterval(run1, time);
 
     }
@@ -131,11 +141,13 @@
         chuotBach.setToaDoX(mangx[Math.floor(Math.random() * 3)]);
         chuotBach.setToaDoY(mangy[Math.floor(Math.random() * 3)]);
         chuotBach.veChuot();
+        // localStorage.setItem("diem", "0")
     }
 
     let ab = setInterval(run1, time);
     document.addEventListener("click", xuLyDapBua);
-        // window.onload(<audio src="star.mp3"></audio>)
+    console.log(diem)
+
 </script>
 </body>
 </html>
